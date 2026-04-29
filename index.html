@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Thiệp Cưới • Đức Hải & Ngọc Linh</title>
+
+<meta property="og:title" content="Thiệp Cưới • Đức Hải & Ngọc Linh">
+<meta property="og:description" content="Trân trọng kính mời quý khách đến chung vui và chúc phúc cho ngày trọng đại của chúng mình.">
+<meta property="og:image" content="1.png">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Jost:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    :root {
+        --red-dark: #8a1018; 
+        --pink-bg: #fdf8f8; 
+        --text-dark: #333333;
+        --text-muted: #777777;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html { height: 100%; font-family: 'Outfit', sans-serif; background: #f0eae8; overflow: hidden; }
+
+    /* ================= BỐ CỤC CHÍNH ================= */
+    .preview-wrap {
+        display: flex; align-items: center; justify-content: center;
+        height: 100%; padding: 15px;
+        background: radial-gradient(ellipse at 30% 50%, rgba(138,16,24,.08), transparent 60%),
+                    radial-gradient(ellipse at 70% 80%, rgba(201,167,107,.06), transparent 50%), #f0eae8;
+    }
+
+    .card-scroll {
+        width: 100%; max-width: 450px; height: 100%; max-height: 92vh; 
+        border-radius: 36px; background: var(--pink-bg);
+        box-shadow: 0 40px 80px rgba(80,30,35,.18), 0 0 0 1px rgba(138,16,24,.15);
+        overflow-y: auto; overflow-x: hidden; position: relative;
+        scrollbar-width: none; 
+    }
+    .card-scroll::-webkit-scrollbar { display: none; }
+
+    /* ================= CỬA MỞ WELCOME ================= */
+    .welcome-door { position: absolute; inset: 0; z-index: 100; display: flex; overflow: hidden; border-radius: inherit; transition: visibility 1.5s; }
+    .door-half { flex: 1; background: var(--pink-bg); position: relative; transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1); }
+    .door-left { border-right: 1px solid rgba(138,16,24, 0.2); transform-origin: left; }
+    .door-right { border-left: 1px solid rgba(138,16,24, 0.2); transform-origin: right; }
+    .welcome-door.open .door-left { transform: translateX(-100%); }
+    .welcome-door.open .door-right { transform: translateX(100%); }
+    .welcome-door.open { visibility: hidden; }
+    .door-content { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+    .door-initial { font-family: 'Great Vibes', cursive; font-size: 7.5rem; color: var(--red-dark); text-shadow: 2px 4px 15px rgba(0,0,0,0.08); }
+
+    /* ================= HOA RƠI & TRÁI TIM BAY (TỐI ƯU LAG) ================= */
+    .petal-rain, .heart-container { position: fixed; inset: 0; pointer-events: none; z-index: 50; overflow: hidden; }
+    .heart-container { z-index: 150; }
+    .petal { position: absolute; top: -30px; font-size: 14px; opacity: 0.6; animation: fall linear forwards; will-change: transform, opacity; }
+    @keyframes fall { 0% { transform: translateY(-30px) rotate(0deg); opacity: 0.6; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
+    
+    .flying-heart { position: absolute; bottom: -50px; font-size: 16px; color: rgba(220, 20, 60, 0.6); animation: flyUp linear forwards; opacity: 0; will-change: transform, opacity; }
+    @keyframes flyUp { 
+        0% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 0; } 
+        10% { opacity: 0.7; } 
+        80% { opacity: 0.7; } 
+        100% { transform: translateY(-110vh) scale(1.2) rotate(360deg); opacity: 0; } 
+    }
+
+    /* ================= ANIMATION TRƯỢT ================= */
+    .reveal { opacity: 0; transition: all 1s cubic-bezier(0.5, 0, 0, 1); }
+    .reveal.active { opacity: 1; transform: translate(0, 0); }
+    .fade-up { transform: translateY(40px); }
+    .slide-from-right { transform: translateX(60px); } 
+    .slide-from-left { transform: translateX(-60px); } 
+    .pop-up { transform: scale(0.5); transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .pop-up.active { transform: scale(1); opacity: 1; }
+    .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; }
+
+    /* ================= 1. 3 ẢNH ĐẦU TIÊN ================= */
+    .hero-collage { display: flex; gap: 8px; padding: 20px 15px 10px; }
+    .hero-col { flex: 1; position: relative; border-radius: 8px; overflow: hidden; aspect-ratio: 2 / 3; background: #f9f9f9; }
+    .hero-col img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; }
+    .hero-overlay-text { position: absolute; bottom: 5px; right: 8px; font-family: 'DM Serif Display', serif; font-size: 3.5rem; color: rgba(255,255,255,0.95); text-align: right; text-shadow: 2px 3px 8px rgba(0,0,0,0.5); z-index: 2; line-height: 1; opacity: 0; }
+    .hero-trigger.active .hero-col:nth-child(1) .hero-overlay-text,
+    .hero-trigger.active .hero-col:nth-child(2) .hero-overlay-text,
+    .hero-trigger.active .hero-col:nth-child(3) .hero-overlay-text { animation: fadeNum 0.4s forwards 0s; }
+    .hero-trigger.active .hero-col:nth-child(1) img,
+    .hero-trigger.active .hero-col:nth-child(2) img,
+    .hero-trigger.active .hero-col:nth-child(3) img { animation: popImg 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.2s; }
+    @keyframes fadeNum { 0% { opacity: 0; transform: translateY(15px); } 100% { opacity: 1; transform: translateY(0); } }
+    @keyframes popImg { 0% { opacity: 0; transform: scale(1.3); filter: blur(4px); } 100% { opacity: 1; transform: scale(1); filter: blur(0); } }
+
+    /* ================= 2. THIỆP MỜI CÁ NHÂN ================= */
+    .invitation-message { text-align: center; padding: 20px 20px 10px; opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+    .invitation-message.active { opacity: 1; transform: translateY(0); }
+    .im-small { font-family: 'Outfit', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 5px; }
+    .im-guest-name { font-family: 'Great Vibes', cursive; font-size: 3rem; color: var(--red-dark); margin-bottom: 10px; text-shadow: 1px 1px 3px rgba(0,0,0,0.05); }
+    .im-desc { font-family: 'Outfit', sans-serif; font-size: 0.95rem; color: var(--text-dark); line-height: 1.6; font-weight: 300; }
+
+    /* ================= 3. BÌA ĐỎ SAVE THE DATE ================= */
+    .floral-cover-container { position: relative; padding: 0 15px; margin: 20px 0 40px; }
+    .flower-corner { position: absolute; width: 90px; height: auto; z-index: 5; object-fit: contain; opacity: 0; transition: opacity 1s; }
+    .flower-corner.active { opacity: 1; }
+    .flower-top-left { top: -20px; left: 10px; } .flower-top-right { top: -20px; right: 10px; }
+    .flower-bottom-left { bottom: -20px; left: 10px; } .flower-bottom-right { bottom: -20px; right: 10px; }
+    .save-the-date-box { background: var(--red-dark); color: #fff; padding: 40px 20px; text-align: center; border-radius: 16px; position: relative; z-index: 2; box-shadow: 0 10px 25px rgba(138, 16, 24, 0.2); overflow: hidden; opacity: 0; transform: translateX(100px); transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .save-the-date-box.active { opacity: 1; transform: translateX(0); }
+    .std-inner { opacity: 0; transform: translateX(-50px); transition: all 0.8s ease-out 0.4s; }
+    .save-the-date-box.active .std-inner { opacity: 1; transform: translateX(0); }
+    .std-title { font-family: 'Great Vibes', cursive; font-size: 2.5rem; margin-bottom: 25px; font-weight: 300;}
+    .std-names { font-family: 'Great Vibes', cursive; font-size: 3.2rem; line-height: 1.1; margin-bottom: 30px; text-shadow: 1px 2px 3px rgba(0,0,0,0.15);}
+    .std-ampersand { font-size: 2rem; display: inline-block; margin: 5px 0; font-family: 'Cormorant Garamond', serif; font-style: italic;}
+    .std-family-row { display: flex; justify-content: space-between; font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; font-weight: 600; margin-bottom: 25px; padding: 0 10px; }
+    .std-date-row { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 30px; }
+    .date-side { flex: 1; font-family: 'Outfit', sans-serif; font-size: 0.9rem; }
+    .date-side .line { height: 1px; background: rgba(255,255,255,0.4); margin: 8px 0; }
+    .date-center { font-family: 'DM Serif Display', serif; font-size: 4.5rem; line-height: 1; padding: 0 5px; }
+    .std-event-name { font-family: 'DM Serif Display', serif; font-size: 2.2rem; margin-bottom: 15px; }
+    .std-address { font-family: 'Outfit', sans-serif; font-size: 0.9rem; font-weight: 300; opacity: 0.9; margin-bottom: 30px; }
+    .std-actions { display: flex; justify-content: center; gap: 20px; }
+    .circle-btn { width: 45px; height: 45px; border: 1.5px solid #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; transition: 0.3s; }
+    .circle-btn:hover { background: #fff; color: var(--red-dark); transform: scale(1.1); box-shadow: 0 0 15px rgba(255,255,255,0.5);}
+
+    /* ================= 4. GIỚI THIỆU ================= */
+    .intro-section { padding: 20px 20px 40px; text-align: center; }
+    .sec-title { font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--red-dark); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 30px; }
+    .couple-card { background: #fff; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.06); margin-bottom: 30px; position: relative; border: 1px solid rgba(138,16,24,0.1); }
+    .couple-img { width: 100%; height: 400px; object-fit: cover; }
+    .couple-info { padding: 25px 20px; position: relative; margin-top: -60px; background: linear-gradient(to top, #fff 80%, transparent); }
+    .couple-name { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--red-dark); margin-bottom: 5px; }
+    .couple-year { font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--text-muted); margin-bottom: 15px; letter-spacing: 2px;}
+    .couple-desc { font-family: 'Outfit', sans-serif; font-size: 0.95rem; color: var(--text-dark); line-height: 1.6; font-weight: 300; }
+
+    /* ================= 5. COUNTDOWN ================= */
+    .countdown-section { background: var(--red-dark); padding: 40px 20px 60px; position: relative; text-align: center; }
+    .cd-arch { border-radius: 200px 200px 0 0; overflow: hidden; margin: 0 auto; border: 2px solid rgba(255,255,255,0.2); position: relative; }
+    .cd-arch img { width: 100%; aspect-ratio: 0.85; object-fit: cover; display: block; transition: transform 3s ease;}
+    .cd-arch:hover img { transform: scale(1.05); }
+    .cd-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.3); display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; }
+    .cd-title-small { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;}
+    .cd-title-big { font-family: 'DM Serif Display', serif; font-size: 2.2rem; letter-spacing: 2px; margin-bottom: 30px; }
+    .cd-timer { display: flex; justify-content: center; gap: 10px; }
+    .cd-box { width: 65px; height: 85px; border: 1px solid rgba(255,255,255,0.6); border-radius: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); backdrop-filter: blur(5px); box-shadow: 0 5px 15px rgba(0,0,0,0.2);}
+    .cd-num { font-size: 1.8rem; font-family: 'DM Serif Display', serif; line-height: 1; }
+    .cd-label { font-size: 0.7rem; font-weight: 300; margin-top: 5px;}
+
+    /* ================= 6. SỰ KIỆN ================= */
+    .event-section { padding: 50px 20px; background: #fff; border: 8px solid var(--red-dark); margin: 0 15px; border-radius: 15px; position: relative; top: -30px; z-index: 3; }
+    .event-card { text-align: center; margin-bottom: 40px; padding-bottom: 30px; border-bottom: 1px dashed #ccc; }
+    .event-card:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .event-arch { border-radius: 200px 200px 0 0; overflow: hidden; margin-bottom: 20px; }
+    .event-arch img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+    .event-title { font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--text-dark); margin-bottom: 10px; }
+    .event-addr { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5; }
+    .event-time { font-weight: 700; color: var(--text-dark); font-size: 1.1rem; margin-bottom: 10px; }
+    .event-date-row { display: flex; justify-content: center; align-items: center; gap: 20px; font-family: 'DM Serif Display', serif; font-size: 1.2rem; margin-bottom: 15px; }
+    .event-date-big { font-size: 3.5rem; color: var(--red-dark); line-height: 1; }
+    .event-lunar { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--text-muted); margin-bottom: 20px; font-size: 1.1rem;}
+    .event-card .circle-btn { border: 1px solid var(--text-muted); color: var(--text-muted); margin: 0 auto; }
+    .event-card .circle-btn:hover { background: var(--red-dark); color: #fff; border-color: var(--red-dark); }
+
+    /* ================= 7. LỊCH THÁNG ================= */
+    .calendar-section { padding: 0 15px; margin: 30px 0; }
+    .calendar-box { border: 1px solid var(--red-dark); border-radius: 12px; padding: 25px 15px 30px; background: #fff; box-shadow: 0 10px 30px rgba(138,16,24,0.05); }
+    .cal-month { text-align: center; font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--text-dark); margin-bottom: 25px; letter-spacing: 1px; text-transform: uppercase; }
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 15px 5px; text-align: center; }
+    .cal-head { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--text-dark); margin-bottom: 5px; }
+    .cal-day { font-family: 'Outfit', sans-serif; font-size: 1rem; color: var(--text-muted); position: relative; display: flex; align-items: center; justify-content: center; height: 30px; }
+    .cal-day.empty { visibility: hidden; }
+    .cal-day.heart-marked { color: var(--red-dark); font-weight: 700; font-size: 1.15rem; }
+    .cal-day.heart-marked::before { content: '\f004'; font-family: 'Font Awesome 6 Free'; font-weight: 400; position: absolute; font-size: 2.2rem; color: var(--red-dark); z-index: 0; animation: heartPulse 1.5s infinite; }
+    .cal-day.heart-marked span { position: relative; z-index: 1; }
+    @keyframes heartPulse { 0% { transform: scale(1); opacity: 0.8;} 50% { transform: scale(1.15); opacity: 1;} 100% { transform: scale(1); opacity: 0.8;} }
+
+    /* ================= 8. DRESS CODE ================= */
+    .dresscode-section { padding: 40px 20px; background: #fff; text-align: center; margin: 0 15px 30px; border-radius: 15px; border: 1px solid rgba(138,16,24,0.1); box-shadow: 0 10px 20px rgba(0,0,0,0.03);}
+    .dresscode-title { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--red-dark); margin-bottom: 10px; }
+    .dresscode-desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 25px; }
+    .color-palette { display: flex; justify-content: center; gap: 15px; }
+    .color-circle { width: 40px; height: 40px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 2px solid #fff; }
+
+    /* ================= 9. LOVE STORY ================= */
+    .story-section { padding: 40px 20px; }
+    .story-container { position: relative; margin-top: 30px; }
+    .story-container::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: rgba(0,0,0,0.1); transform: translateX(-50%); }
+    .story-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; position: relative; width: 100%; }
+    .story-item:nth-child(even) { flex-direction: row-reverse; }
+    .story-img-box { width: 45%; border: 4px solid var(--red-dark); border-radius: 10px; overflow: hidden; }
+    .story-img-box img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+    .story-text-box { width: 45%; padding: 10px; text-align: right; }
+    .story-item:nth-child(even) .story-text-box { text-align: left; }
+    .story-dot { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 16px; height: 16px; background: var(--red-dark); border-radius: 50%; border: 3px solid var(--pink-bg); z-index: 2; box-shadow: 0 0 10px rgba(138,16,24,0.5);}
+    .story-step-title { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--text-dark); margin-bottom: 8px; }
+    .story-step-desc { font-size: 0.85rem; color: var(--text-dark); line-height: 1.5; font-weight: 300; }
+
+    /* ================= 10. ALBUM ẢNH (BỐ CỤC HIỆN ĐẠI MỚI) ================= */
+    .album-wrapper {
+        position: relative;
+        padding: 50px 20px;
+        margin-top: 30px;
+        border-radius: 36px 36px 0 0;
+        overflow: hidden;
+    }
+    .album-bg {
+        position: absolute; inset: 0;
+        background-image: url('ANH_SAU.png'); /* ẢNH PHÍA SAU THEO YÊU CẦU */
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        z-index: 0;
+    }
+    .album-overlay {
+        position: absolute; inset: 0;
+        background: linear-gradient(to bottom, rgba(255,248,248,0.9), rgba(138,16,24,0.85));
+        z-index: 1;
+    }
+    .album-content { position: relative; z-index: 2; }
+    .album-content .sec-title { color: var(--red-dark); text-align: center; text-shadow: 1px 1px 10px rgba(255,255,255,0.5);}
+    
+    /* Lưới Masonry Hiện Đại */
+    .masonry-grid {
+        column-count: 2;
+        column-gap: 12px;
+        margin-top: 25px;
+    }
+    .masonry-item {
+        break-inside: avoid;
+        margin-bottom: 12px;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        border: 2px solid rgba(255,255,255,0.6);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .masonry-item img {
+        width: 100%;
+        display: block;
+        object-fit: cover;
+    }
+    .masonry-item:hover {
+        transform: scale(1.05) translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        border-color: #fff;
+    }
+
+    /* ================= 11. HỘP QUÝ LÌ XÌ ================= */
+    .wish-block { margin: 30px 15px; text-align:center; padding:30px 20px; background: #fff; border-radius:20px; box-shadow: 0 15px 40px rgba(138,16,24,0.08); border: 2px solid var(--pink-bg); position: relative; z-index: 2;}
+    .wish-title { font-size:1.2rem; font-family: 'DM Serif Display', serif; color:var(--red-dark); margin-bottom:20px; }
+    .btn-toggle-qr { background: var(--red-dark); color: #fff; padding: 14px 30px; border-radius: 40px; font-weight: 600; font-family: 'Outfit', sans-serif; border: none; cursor: pointer; transition: 0.3s; font-size: 1rem; width: 100%; animation: pulse-glow-btn 2s infinite; }
+    @keyframes pulse-glow-btn { 0% { box-shadow: 0 0 0 0 rgba(138,16,24,0.5); } 70% { box-shadow: 0 0 0 15px rgba(138,16,24,0); } 100% { box-shadow: 0 0 0 0 rgba(138,16,24,0); } }
+    #qrContent { display: none; margin-top: 25px; animation: fadeIn 0.5s ease forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    .qr-split-row { display: flex; gap: 15px; flex-direction: column; }
+    .qr-col { background: var(--pink-bg); border-radius: 16px; padding: 15px; border: 1px solid rgba(138,16,24,0.1); }
+    .qr-col img { width: 150px; height: 150px; object-fit: cover; border-radius: 12px; margin: 10px auto; display: block; border: 2px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1);}
+    .qr-role { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); letter-spacing: 2px; }
+    .qr-name { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--red-dark); margin: 5px 0;}
+    .qr-bank { font-size: 0.9rem; font-weight: 600; color: var(--text-dark); }
+    .qr-num { font-size: 1.1rem; color: var(--red-dark); font-weight: bold; margin-top: 5px; letter-spacing: 1px;}
+
+    /* ================= 12. THANK YOU ================= */
+    .thankyou-block { position:relative; height:400px; border-radius: 0; overflow: hidden; margin-top: -20px;}
+    .thankyou-bg { position: absolute; inset: 0; background-image: url('18.png'); background-size: cover; background-position: center; background-attachment: fixed; }
+    .thankyou-overlay { position:absolute; inset:0; background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(138,16,24,0.8)); }
+    .thankyou-text { position:absolute; inset:0; display:flex; flex-direction: column; align-items:center; justify-content:center; color:#fff; z-index:2; text-align: center; padding: 20px;}
+    .ty-script { font-family:'Great Vibes',cursive; font-size:4.5rem; text-shadow:0 4px 16px rgba(0,0,0,.6); line-height: 1; margin-bottom: 10px;}
+    .ty-sub { font-size: 0.95rem; font-weight: 300; opacity: 0.9; line-height: 1.5;}
+
+    /* ================= FOOTER CREDIT (DỜI XUỐNG CUỐI CÙNG) ================= */
+    .footer-credit-wrap {
+        background: #f0eae8; 
+        padding: 30px 20px 40px; 
+        text-align: center;
+        border-radius: 0 0 36px 36px;
+    }
+    .footer-credit {
+        display: inline-flex; align-items: center; justify-content: center; gap: 15px;
+        background: #fff; padding: 10px 25px; border-radius: 40px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        border: 1px solid rgba(138,16,24,0.1);
+    }
+    .fc-text { font-family: 'DM Serif Display', serif; color: var(--red-dark); font-size: 1.1rem; font-weight: bold; margin-right: 5px;}
+    .footer-credit a { color: var(--text-muted); font-size: 1.2rem; text-decoration: none; transition: 0.3s; display: flex; align-items: center; justify-content: center;}
+    .footer-credit a:hover { color: var(--red-dark); transform: scale(1.15); }
+
+    /* NÚT NHẠC NỔI */
+    .music-note { position:fixed; bottom:20px; right: 20px; z-index:200; width:50px; height:50px; border-radius:50%; background:var(--red-dark); color:#fff; border:none; cursor:pointer; font-size:1.2rem; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(138,16,24,.4); transition:.2s; }
+    .music-note:hover { transform:scale(1.1); }
+    .music-note.playing { animation: spin 4s linear infinite; }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+    @media(min-width: 500px) { .music-note { right: calc(50% - 280px); } }
+</style>
+</head>
+<body>
+
+<audio id="bgMusic" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<div class="heart-container" id="heartContainer"></div>
+
+<div class="preview-wrap">
+    <div class="card-scroll" id="inviteCard">
+
+        <div class="welcome-door" id="welcomeDoor">
+            <div class="door-half door-left"><div class="door-content"><div class="door-initial">H</div></div></div>
+            <div class="door-half door-right"><div class="door-content"><div class="door-initial">L</div></div></div>
+        </div>
+
+        <div class="petal-rain" id="petalContainer"></div>
+
+        <div class="card-body">
+
+            <div class="hero-collage hero-trigger">
+                <div class="hero-col"><div class="hero-overlay-text">30</div><img src="1.png" alt="Ảnh cưới 1"></div>
+                <div class="hero-col"><div class="hero-overlay-text">05</div><img src="2.png" alt="Ảnh cưới 2"></div>
+                <div class="hero-col"><div class="hero-overlay-text">26</div><img src="3.png" alt="Ảnh cưới 3"></div>
+            </div>
+
+            <div class="invitation-message" id="invitationSection">
+                <p class="im-small">Trân trọng kính mời</p>
+                <div class="im-guest-name" id="guestNameDisplay">Quý Khách</div>
+                <p class="im-desc">Đến chung vui và chúc phúc cho ngày trọng đại của chúng mình.</p>
+            </div>
+
+            <div class="floral-cover-container">
+                <img src="anh_tren_trai.png" class="flower-corner flower-top-left" onerror="this.style.display='none'"> 
+                <img src="anh_tren_phai.png" class="flower-corner flower-top-right" onerror="this.style.display='none'"> 
+                <div class="save-the-date-box" id="mainRedBox">
+                    <div class="std-inner">
+                        <div class="std-title">Save The Date</div>
+                        <div class="std-names">Đức Hải <br><span class="std-ampersand">&</span> <br>Ngọc Linh</div>
+                        <div class="std-family-row"><span>Nhà Trai</span><span>Nhà Gái</span></div>
+                        <div class="std-date-row">
+                            <div class="date-side"><div class="line"></div><div>Thứ 7</div><div class="line"></div></div>
+                            <div class="date-center">30</div>
+                            <div class="date-side"><div class="line"></div><div>Vào lúc 17:00</div><div class="line"></div></div>
+                        </div>
+                        <div class="std-event-name">Lễ Thành Hôn</div>
+                        <div class="std-address">Nam Viên - Tân Chi - Bắc Ninh</div>
+                        <div class="std-actions">
+                            <div class="circle-btn"><i class="fa-solid fa-phone"></i></div>
+                            <div class="circle-btn"><i class="fa-solid fa-map-location-dot"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <img src="anh_duoi_trai.png" class="flower-corner flower-bottom-left" onerror="this.style.display='none'">
+                <img src="anh_duoi_phai.png" class="flower-corner flower-bottom-right" onerror="this.style.display='none'">
+            </div>
+
+            <div class="intro-section">
+                <h2 class="sec-title reveal fade-up">Giới Thiệu</h2>
+                <div class="couple-card reveal slide-from-right">
+                    <img class="couple-img" src="4.png" alt="Ảnh Chú rể">
+                    <div class="couple-info">
+                        <div class="couple-name">Đức Hải</div>
+                        <p class="couple-desc">Là một người đẹp trai, hay cười, có khiếu hài hước, cô dâu gặp là yêu luôn hehe.</p>
+                    </div>
+                </div>
+                <div class="couple-card reveal slide-from-left">
+                    <img class="couple-img" src="5.png" alt="Ảnh Cô dâu">
+                    <div class="couple-info">
+                        <div class="couple-name">Ngọc Linh</div>
+                        <p class="couple-desc">Là một người xinh gái, đáng yêu, hòa đồng, đúng gu chú rể hehe.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="countdown-section reveal fade-up">
+                <div class="cd-arch">
+                    <img src="6.png" alt="Ảnh đếm ngược">
+                    <div class="cd-overlay">
+                        <div class="cd-title-small">Cùng đếm ngược thời gian</div>
+                        <div class="cd-title-big">Save The Date</div>
+                        <div class="cd-timer">
+                            <div class="cd-box"><span class="cd-num" id="cd-day">00</span><span class="cd-label">Ngày</span></div>
+                            <div class="cd-box"><span class="cd-num" id="cd-hr">00</span><span class="cd-label">Giờ</span></div>
+                            <div class="cd-box"><span class="cd-num" id="cd-min">00</span><span class="cd-label">Phút</span></div>
+                            <div class="cd-box"><span class="cd-num" id="cd-sec">00</span><span class="cd-label">Giây</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="event-section reveal slide-from-right">
+                <div class="event-card">
+                    <div class="event-arch"><img src="7.png" alt="Ảnh nhà trai"></div>
+                    <div class="event-title">Tiệc Cưới Nhà Trai</div>
+                    <div class="event-addr">Nam Viên - Tân Chi - Bắc Ninh</div>
+                    <div class="event-time">Vào lúc 17:00</div>
+                    <div class="event-date-row"><span>Thứ 7</span><span class="event-date-big">30/05</span><span>2026</span></div>
+                    <div class="event-lunar">14-04-2026 Âm Lịch</div>
+                    <button class="circle-btn"><i class="fa-solid fa-map-location-dot"></i></button>
+                </div>
+                <div class="event-card" style="border:none; padding-top:20px;">
+                    <div class="event-arch"><img src="8.png" alt="Ảnh nhà gái"></div>
+                    <div class="event-title">Tiệc Cưới Nhà Gái</div>
+                    <div class="event-addr">Chi Hồ - Tân Chi - Bắc Ninh</div>
+                    <div class="event-time">Vào lúc 17:00</div>
+                    <div class="event-date-row"><span>Thứ 7</span><span class="event-date-big">30/05</span><span>2026</span></div>
+                    <div class="event-lunar">14-04-2026 Âm Lịch</div>
+                    <button class="circle-btn"><i class="fa-solid fa-map-location-dot"></i></button>
+                </div>
+            </div>
+
+            <div class="calendar-section reveal fade-up">
+                <div class="calendar-box">
+                    <div class="cal-month">Tháng 5 - 2026</div>
+                    <div class="cal-grid">
+                        <div class="cal-head">T2</div><div class="cal-head">T3</div><div class="cal-head">T4</div>
+                        <div class="cal-head">T5</div><div class="cal-head">T6</div><div class="cal-head">T7</div><div class="cal-head">CN</div>
+                        <div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day">1</div><div class="cal-day">2</div><div class="cal-day">3</div>
+                        <div class="cal-day">4</div><div class="cal-day">5</div><div class="cal-day">6</div><div class="cal-day">7</div><div class="cal-day">8</div><div class="cal-day">9</div><div class="cal-day">10</div>
+                        <div class="cal-day">11</div><div class="cal-day">12</div><div class="cal-day">13</div><div class="cal-day">14</div><div class="cal-day">15</div><div class="cal-day">16</div><div class="cal-day">17</div>
+                        <div class="cal-day">18</div><div class="cal-day">19</div><div class="cal-day">20</div><div class="cal-day">21</div><div class="cal-day">22</div><div class="cal-day">23</div><div class="cal-day">24</div>
+                        <div class="cal-day">25</div><div class="cal-day">26</div><div class="cal-day">27</div><div class="cal-day">28</div><div class="cal-day">29</div><div class="cal-day heart-marked"><span>30</span></div><div class="cal-day">31</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dresscode-section reveal pop-up">
+                <div class="dresscode-title">Dress Code</div>
+                <div class="dresscode-desc">Để khung hình thêm phần đồng điệu, khuyến khích khách mời diện trang phục theo tone màu dưới đây:</div>
+                <div class="color-palette">
+                    <div class="color-circle" style="background-color: #ffffff;"></div>
+                    <div class="color-circle" style="background-color: #eaddd3;"></div>
+                    <div class="color-circle" style="background-color: #f7d6d9;"></div>
+                    <div class="color-circle" style="background-color: #8a1018;"></div>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h2 class="sec-title reveal fade-up" style="text-align:center">Love Story</h2>
+                <div class="story-container">
+                    <div class="story-item reveal slide-from-left">
+                        <div class="story-dot"></div>
+                        <div class="story-img-box"><img src="9.png" alt="Love story 1"></div>
+                        <div class="story-text-box">
+                            <div class="story-step-title">Lần đầu gặp mặt</div>
+                            <div class="story-step-desc">Chúng mình gặp nhau trong một ngày rất bình thường, nhưng ánh mắt đầu tiên lại khiến mọi thứ trở nên thật đặc biệt.</div>
+                        </div>
+                    </div>
+                    <div class="story-item reveal slide-from-right">
+                        <div class="story-dot"></div>
+                        <div class="story-img-box"><img src="10.png" alt="Love story 2"></div>
+                        <div class="story-text-box">
+                            <div class="story-step-title">Ngỏ lời yêu</div>
+                            <div class="story-step-desc">Sau những lần trò chuyện, quan tâm, một lời tỏ tình giản dị đã được nói ra. Và từ đó chính thức nắm tay nhau.</div>
+                        </div>
+                    </div>
+                    <div class="story-item reveal slide-from-left">
+                        <div class="story-dot"></div>
+                        <div class="story-img-box"><img src="11.png" alt="Love story 3"></div>
+                        <div class="story-text-box">
+                            <div class="story-step-title">Cầu hôn</div>
+                            <div class="story-step-desc">Trong một khoảnh khắc đầy cảm xúc, với tất cả tình yêu. Một cái gật đầu hạnh phúc đã mở ra chương mới cho cả hai.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="album-wrapper reveal fade-up">
+                <div class="album-bg"></div>
+                <div class="album-overlay"></div>
+                <div class="album-content">
+                    <h2 class="sec-title">Album Ảnh</h2>
+                    <div style="text-align: center; margin-bottom: 5px;"><i class="fa-solid fa-camera-retro" style="color:#fff; font-size:1.5rem; opacity: 0.8;"></i></div>
+                    
+                    <div class="masonry-grid">
+                        <div class="masonry-item reveal pop-up"><img src="12.png" alt="Album 1"></div>
+                        <div class="masonry-item reveal pop-up delay-1"><img src="13.png" alt="Album 2"></div>
+                        <div class="masonry-item reveal pop-up"><img src="14.png" alt="Album 3"></div>
+                        <div class="masonry-item reveal pop-up delay-1"><img src="15.png" alt="Album 4"></div>
+                        <div class="masonry-item reveal pop-up"><img src="16.png" alt="Album 5"></div>
+                        <div class="masonry-item reveal pop-up delay-1"><img src="17.png" alt="Album 6"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wish-block reveal fade-up">
+                <div class="wish-title"><i class="fa-solid fa-envelope-open-text" style="margin-right: 8px;"></i> Hộp Quý Yêu Thương</div>
+                <button class="btn-toggle-qr" id="btnToggleQR">Gửi Lời Chúc & Quà Mừng</button>
+                <div id="qrContent">
+                    <div class="qr-split-row">
+                        <div class="qr-col">
+                            <p class="qr-role">Chú Rể</p>
+                            <p class="qr-name">Đức Hải</p>
+                            <img src="QRChure.png" alt="QR Chú Rể" onerror="this.style.display='none'">
+                        </div>
+                        <div class="qr-col">
+                            <p class="qr-role">Cô Dâu</p>
+                            <p class="qr-name">Ngọc Linh</p>
+                            <img src="QRCodau.png" alt="QR Cô Dâu" onerror="this.style.display='none'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="thankyou-block reveal fade-up">
+                <div class="thankyou-bg"></div>
+                <div class="thankyou-overlay"></div>
+                <div class="thankyou-text">
+                    <div class="ty-script">Thank You</div>
+                    <div class="ty-sub">Sự hiện diện của bạn là niềm vinh hạnh cho gia đình chúng tôi!</div>
+                </div>
+            </div>
+
+            <div class="footer-credit-wrap">
+                <div class="footer-credit">
+                    <span class="fc-text">NH Wedding</span>
+                    <a href="https://www.facebook.com/NguyenNamUnit/" target="_blank" title="Facebook của chúng tôi"><i class="fab fa-facebook"></i></a>
+                    <a href="#" target="_blank" title="TikTok của chúng tôi"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<button class="music-note" id="musicBtn" title="Bật/tắt nhạc nền"><i class="fa-solid fa-music" id="musicIcon"></i></button>
+
+<script>
+    // 0. XỬ LÝ LỜI MỜI CÁ NHÂN HÓA (?to=Tên Khách)
+    const urlParams = new URLSearchParams(window.location.search);
+    const toName = urlParams.get('to');
+    if (toName) {
+        const formattedName = toName.replace(/[-_]/g, ' '); 
+        document.getElementById('guestNameDisplay').textContent = formattedName;
+        document.title = `Thiệp Cưới • ${formattedName}`; 
+    }
+
+    // 1. SEQUENCE ANIMATION: TẤT CẢ PHẦN ĐẦU XUẤT HIỆN CÙNG LÚC
+    const door = document.getElementById('welcomeDoor');
+    const heroTrigger = document.querySelector('.hero-trigger');
+    const inviteSec = document.getElementById('invitationSection');
+    const redBox = document.getElementById('mainRedBox');
+    const flowers = document.querySelectorAll('.flower-corner');
+
+    setTimeout(() => { 
+        door.classList.add('open'); 
+        setTimeout(() => { 
+            heroTrigger.classList.add('active'); 
+            inviteSec.classList.add('active'); 
+            redBox.classList.add('active');
+            flowers.forEach(f => f.classList.add('active'));
+        }, 800); 
+    }, 1500);
+
+    // 2. Observer cho các khối cuộn còn lại
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) { entry.target.classList.add('active'); }
+        });
+    }, { threshold: 0.15, rootMargin: "0px 0px -20px 0px" });
+    
+    document.querySelectorAll('.reveal:not(.hero-trigger):not(#invitationSection):not(#mainRedBox)').forEach(el => observer.observe(el));
+
+    // 3. Toggle Hộp Quý
+    const btnToggleQR = document.getElementById('btnToggleQR');
+    const qrContent = document.getElementById('qrContent');
+    const inviteCard = document.getElementById('inviteCard');
+
+    btnToggleQR.addEventListener('click', function() {
+        if(qrContent.style.display === 'none' || qrContent.style.display === '') {
+            qrContent.style.display = 'block';
+            this.innerHTML = 'Đóng Hộp Quý';
+            setTimeout(() => inviteCard.scrollBy({ top: 400, behavior: 'smooth' }), 100);
+        } else {
+            qrContent.style.display = 'none';
+            this.innerHTML = 'Gửi Lời Chúc & Quà Mừng';
+        }
+    });
+
+    // 4. Nhạc Nền
+    const audio = document.getElementById('bgMusic'); 
+    const musicBtn = document.getElementById('musicBtn');
+    const musicIcon = document.getElementById('musicIcon');
+    musicBtn.onclick = () => {
+        if(audio.paused) { 
+            audio.play().catch(()=>{}); 
+            musicIcon.className = 'fa-solid fa-pause'; 
+            musicBtn.classList.add('playing'); 
+        } else { 
+            audio.pause(); 
+            musicIcon.className = 'fa-solid fa-music'; 
+            musicBtn.classList.remove('playing'); 
+        }
+    };
+
+    // 5. TỐI ƯU HIỆU ỨNG: Hoa Rơi & Trái Tim Bay
+    const petalContainer = document.getElementById('petalContainer');
+    const heartContainer = document.getElementById('heartContainer');
+    const symbols = ['🌸', '🌺', '🌷', '💮'];
+    
+    function createPetal() {
+        // Giới hạn số lượng thẻ trên màn hình để chống lag giật
+        if(petalContainer.childElementCount > 10) return; 
+        const p = document.createElement('div'); p.className = 'petal';
+        p.textContent = symbols[Math.floor(Math.random()*symbols.length)];
+        p.style.cssText = `left:${Math.random()*100}%;animation-duration:${5+Math.random()*6}s;font-size:${12+Math.random()*12}px`;
+        petalContainer.appendChild(p); 
+        p.addEventListener('animationend', () => p.remove()); 
+    }
+
+    function createHeart() {
+        // Giới hạn số lượng trái tim bay
+        if(heartContainer.childElementCount > 12) return; 
+        const heart = document.createElement('div');
+        heart.className = 'flying-heart';
+        heart.innerHTML = '<i class="fa-solid fa-heart"></i>';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (6 + Math.random() * 8) + 's'; 
+        heart.style.fontSize = (10 + Math.random() * 15) + 'px'; 
+        heart.style.color = Math.random() > 0.5 ? 'rgba(220, 20, 60, 0.5)' : 'rgba(255, 182, 193, 0.6)';
+        heartContainer.appendChild(heart);
+        heart.addEventListener('animationend', () => heart.remove());
+    }
+
+    // Tăng thời gian delay để giảm tải render cho trình duyệt
+    setInterval(createPetal, 1000); 
+    setInterval(createHeart, 900);
+
+    // 6. Countdown (Cập nhật cho ngày 30/05/2026 lúc 17:00)
+    function countdown() {
+        const target = new Date('2026-05-30T17:00:00'); 
+        const now = new Date(); 
+        const diff = target - now;
+        if(diff <= 0) { 
+            document.getElementById('cd-day').textContent = '00';
+            document.getElementById('cd-hr').textContent = '00';
+            document.getElementById('cd-min').textContent = '00';
+            document.getElementById('cd-sec').textContent = '00';
+            return; 
+        }
+        document.getElementById('cd-day').textContent = String(Math.floor(diff/86400000)).padStart(2,'0');
+        document.getElementById('cd-hr').textContent = String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
+        document.getElementById('cd-min').textContent = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+        document.getElementById('cd-sec').textContent = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+    }
+    countdown();
+    setInterval(countdown, 1000);
+</script>
+
+</body>
+</html>
